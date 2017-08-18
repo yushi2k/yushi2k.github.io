@@ -25,27 +25,67 @@
   </head>
   <body>
     <form>
+
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <h4>Passcode</h4>
+            <h4> --- Create SHA256 Codes --- Passcode</h4>
            <textarea id="passcode" rows="1" style="width:100%"  ></textarea>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <h4>Sha Result</h4>
-           <div id="shacode"> </div><br><br>
+           <div id="shacode"> </div>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <h4>Check Sha</h4>
-           <textarea id="checksha" rows="1" style="width:100%"  ></textarea>
+---------------------------------------------
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <h4>Check</h4>
+            <h4>--- Check SHA 256  ---</h4>
+           <div id="checksha"> </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h4>Passcode</h4>
            <textarea id="checkcode" rows="1" style="width:100%"  ></textarea>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <h4>Check Result</h4>
-           <div id="checkresult"> </div><br>
+           <div id="checkresult"> </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+---------------------------------------------
         </div>
     </form>
+
+<div width="80%" class="col-md-12 col-sm-12 col-xs-12">
+<code>source code</code>
+<pre>
+
+&lt;div class="col-md-12 col-sm-12 col-xs-12"&gt;
+    &lt;h4&gt;--- Check SHA 256  ---&lt;/h4&gt;   &lt;/div&gt;
+&lt;div class="col-md-12 col-sm-12 col-xs-12"&gt;
+    &lt;h4&gt;Passcode&lt;/h4&gt;
+   &lt;textarea id="checkcode" rows="1" style="width:100%"  &gt;&lt;/textarea&gt;
+&lt;/div&gt;
+&lt;div class="col-md-12 col-sm-12 col-xs-12"&gt;
+    &lt;h4&gt;Check Result&lt;/h4&gt;
+   &lt;div id="checkresult"&gt; &lt;/div&gt;
+&lt;/div&gt;
+
+
+  &lt;script type="javascript">
+  $('#checkcode').keyup(function() {
+    if ($('#checkcode').val().length >= 2) {
+      var sha256code="<div id="key"></div>";
+      var str = SHA256( $('#checkcode').val() );
+      if ( sha256code == str  ){
+        $('#checkresult').text("valid passcode");
+      }else{
+        $('#checkresult').text("invalid passcode");
+      }
+   }
+  });
+  &lt;/script>
+</pre>
+</div>
+
     <script src="webtoolkit.sha256.js"></script>
 <script language="javascript">
 $(document).ready(function() {
@@ -54,6 +94,7 @@ $(document).ready(function() {
       var str = SHA256( $('#passcode').val() );
       $('#shacode').text( str ) ;
       $('#checksha').text( str ) ;
+      $('#key').text( str ) ;
       
    }
   });
@@ -61,10 +102,10 @@ $(document).ready(function() {
   $('#checkcode').keyup(function() {
     if ($('#checkcode').val().length >= 2) {
       var str = SHA256( $('#checkcode').val() );
-      if ( $('#checksha').val() == str  ){
-        $('#checkresult').text("valid passcode");
+      if ( $('#checksha').text() == str  ){
+        $('#checkresult').html("<font color=green>valid passcode</font>");
       }else{
-        $('#checkresult').text("invalid passcode");
+        $('#checkresult').html("<font color=red>invalid passcode</font>");
       }
    }
   });
