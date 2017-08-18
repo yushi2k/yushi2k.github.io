@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Sha256 Converter and checker </title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+<style type="text/css">
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td  {
+    font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+    font-size: 16px;
+    line-height: 1.2;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+</style>
+  </head>
+  <body>
+    <form>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h4>Passcode</h4>
+           <textarea id="passcode" rows="1" style="width:100%"  ></textarea>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h4>Sha Result</h4>
+           <div id="shacode"> </div><br><br>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h4>Check Sha</h4>
+           <textarea id="checksha" rows="1" style="width:100%"  ></textarea>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h4>Check</h4>
+           <textarea id="checkcode" rows="1" style="width:100%"  ></textarea>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h4>Check Result</h4>
+           <div id="checkresult"> </div><br>
+        </div>
+    </form>
+    <script src="webtoolkit.sha256.js"></script>
+<script language="javascript">
+$(document).ready(function() {
+  $('#passcode').keyup(function() {
+    if ($('#passcode').val().length >= 2) {
+      var str = SHA256( $('#passcode').val() );
+      $('#shacode').text( str ) ;
+      $('#checksha').text( str ) ;
+      
+   }
+  });
+
+  $('#checkcode').keyup(function() {
+    if ($('#checkcode').val().length >= 2) {
+      var str = SHA256( $('#checkcode').val() );
+      if ( $('#checksha').val() == str  ){
+        $('#checkresult').text("valid passcode");
+      }else{
+        $('#checkresult').text("invalid passcode");
+      }
+   }
+  });
+
+});
+
+</script>
+
+
+  </body>
+</html>
